@@ -4,25 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xamarin_DIF
+namespace Xamarin_DIF.Storage
 {
-    public interface IApplicationStateManager
+    public interface ISettingsStorage
     {
         #region Properties
 
         string DeviceID
         {
             get;
-        }
-
-        String Description
-        {
-            get;            
-        }
-
-        int StateID
-        {
-            get;
+            set;
         }
 
         #endregion

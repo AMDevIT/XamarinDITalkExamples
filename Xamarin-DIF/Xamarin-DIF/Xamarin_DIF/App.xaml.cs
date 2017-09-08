@@ -5,6 +5,7 @@ using System.Text;
 
 using Xamarin.Forms;
 using Xamarin_DIF.Hardware.BT;
+using Xamarin_DIF.Storage;
 
 namespace Xamarin_DIF
 {
@@ -14,6 +15,7 @@ namespace Xamarin_DIF
 
         private IApplicationStateManager applicationStateManager = null;
         private IBluetoothDriver bluetoothDriver = null;
+        private ISettingsStorage settingsStorage = null;
 
         #endregion
 
@@ -69,6 +71,7 @@ namespace Xamarin_DIF
 
             this.applicationStateManager = DependencyService.Get<IApplicationStateManager>();
             this.bluetoothDriver = DependencyService.Get<IBluetoothDriver>();
+            this.settingsStorage = DependencyService.Get<ISettingsStorage>();
 
             this.DependencyInitializationEnd = DateTime.Now;
         }

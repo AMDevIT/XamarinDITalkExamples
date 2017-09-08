@@ -10,9 +10,9 @@ namespace XamarinExNoDIF
     public partial class App : Application
     {
         #region Fields
-               
 
-        #endregion
+
+        #endregion      
 
         #region .ctor
 

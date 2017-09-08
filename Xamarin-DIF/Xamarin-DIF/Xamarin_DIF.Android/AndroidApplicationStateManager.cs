@@ -20,6 +20,12 @@ namespace Xamarin_DIF.Droid
     {
         #region Properties
 
+        public string DeviceID
+        {
+            get;
+            private set;
+        }
+
         public String Description
         {
             get;
@@ -30,6 +36,26 @@ namespace Xamarin_DIF.Droid
         {
             get;
             private set;
+        }
+
+        #endregion
+
+        #region .ctor
+
+        public AndroidApplicationStateManager()
+        {
+            this.DeviceID = this.GetDeviceID();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private String GetDeviceID()
+        {
+            String result = "Cannot retrieve Android application ID";
+
+            return result;
         }
 
         #endregion

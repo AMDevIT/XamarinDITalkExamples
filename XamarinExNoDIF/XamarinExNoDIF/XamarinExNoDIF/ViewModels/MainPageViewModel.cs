@@ -14,7 +14,7 @@ namespace XamarinExNoDIF.ViewModels
 
         private DateTime initStart = default(DateTime);
         private DateTime initEnd = default(DateTime);
-        private String duration = String.Empty;
+        private string duration = String.Empty;
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace XamarinExNoDIF.ViewModels
             {
                 return this.initStart;
             }
-            private set
+            protected set
             {
                 this.SetProperty(ref this.initStart, value);
             }
@@ -38,11 +38,41 @@ namespace XamarinExNoDIF.ViewModels
             {
                 return this.initEnd;
             }
-            private set
+            protected set
             {
                 this.SetProperty(ref this.initEnd, value);
             }
         }
+
+        public String Duration
+        {
+            get
+            {
+                return this.duration;
+            }
+            private set
+            {
+                this.SetProperty(ref this.duration, value);
+            }
+        }
+
+        #endregion
+
+        #region .ctor
+
+        public MainPageViewModel()
+        {
+            App currentApp = App.Current as App;
+            TimeSpan durationSpan = TimeSpan.Zero;
+
+            this.InitStart = ApplicationStateManagerBase.Current.InitStart;
+            this.InitEnd = ApplicationStateManagerBase.Current.InitEnd;
+            this.Duration = ApplicationStateManagerBase.Current.Duration;
+        }
+
+        #endregion
+
+        #region Methods
 
         #endregion
     }
