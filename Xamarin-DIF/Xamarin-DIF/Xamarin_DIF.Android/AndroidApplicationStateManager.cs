@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Xamarin_DIF;
+using static Android.Provider.Settings;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Xamarin_DIF.Droid.AndroidApplicationStateManager))]
 
@@ -53,8 +54,13 @@ namespace Xamarin_DIF.Droid
 
         private String GetDeviceID()
         {
-            String result = "Cannot retrieve Android application ID";
+            String result = null;
+            String deviceID = null;
 
+            deviceID = Secure.GetString(Application.Context.ContentResolver, Secure.AndroidId);
+            if (String.IsNullOrEmpty(deviceID))
+                deviceID = Build.Serial;
+            result = deviceID + "_" + Build.Manufacturer + "_" + Build.Model;
             return result;
         }
 

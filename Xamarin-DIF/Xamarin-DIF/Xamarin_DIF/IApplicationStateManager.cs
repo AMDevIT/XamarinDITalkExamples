@@ -10,16 +10,19 @@ namespace Xamarin_DIF
     {
         #region Properties
 
+        // Current device hardware identification string
         string DeviceID
         {
             get;
         }
 
+        // Current application state description
         String Description
         {
             get;            
         }
 
+        // Current application state ID
         int StateID
         {
             get;

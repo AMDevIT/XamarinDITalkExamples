@@ -55,23 +55,11 @@ namespace XamarinExNoDIF
         }
 
         private void InitializeDependencies(IApplicationStateManagerInitializer applicationStateManagerInitializer)
-        {
-            DateTime initStart = default(DateTime);
-            DateTime initEnd = default(DateTime);
-            TimeSpan durationSpan = TimeSpan.Zero;
-            String duration = null;
-
+        {            
             if (applicationStateManagerInitializer == null)
                 throw new ArgumentNullException(nameof(applicationStateManagerInitializer));
-            initStart = DateTime.Now;
+            
             ApplicationStateManagerBase.InitializePlatformInstance(applicationStateManagerInitializer);
-            ApplicationStateManagerBase.Current.InitializeApplicationServices();
-            initEnd = DateTime.Now;
-            durationSpan = initEnd - initStart;
-            duration = durationSpan.ToString();
-            ApplicationStateManagerBase.Current.InitStart = initStart;
-            ApplicationStateManagerBase.Current.InitEnd = initStart;
-            ApplicationStateManagerBase.Current.Duration = duration;
         }
 
         #endregion

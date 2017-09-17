@@ -4,17 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XamarinExNoDIF.Common;
+using XamarinExNoDIF.Hardware.BT;
+using XamarinExNoDIF.Storage;
 
 namespace XamarinExNoDIF.ViewModels
 {
     public class MainPageViewModel
-        : BindableBase
+       : BindableBase
     {
+        #region Consts
+
+        private const string DateTimeFormatString = "HH:mm:ss, FFFF";
+
+        #endregion
+
         #region Fields
 
         private DateTime initStart = default(DateTime);
         private DateTime initEnd = default(DateTime);
         private string duration = String.Empty;
+
+        private BluetoothDriverBase bluetoothDriver = null;
+        private SettingsStorageBase settingsStorage = null;
 
         #endregion
 
@@ -32,6 +43,17 @@ namespace XamarinExNoDIF.ViewModels
             }
         }
 
+        public String FormattedInitStart
+        {
+            get
+            {
+                String result = null;
+
+                result = this.initStart.ToString(DateTimeFormatString);
+                return result;
+            }
+        }
+
         public DateTime InitEnd
         {
             get
@@ -41,6 +63,17 @@ namespace XamarinExNoDIF.ViewModels
             protected set
             {
                 this.SetProperty(ref this.initEnd, value);
+            }
+        }
+
+        public String FormattedInitEnd
+        {
+            get
+            {
+                String result = null;
+
+                result = this.initEnd.ToString(DateTimeFormatString);
+                return result;
             }
         }
 
@@ -62,17 +95,31 @@ namespace XamarinExNoDIF.ViewModels
 
         public MainPageViewModel()
         {
-            App currentApp = App.Current as App;
-            TimeSpan durationSpan = TimeSpan.Zero;
+            this.InitStart = DateTime.Now;
 
-            this.InitStart = ApplicationStateManagerBase.Current.InitStart;
-            this.InitEnd = ApplicationStateManagerBase.Current.InitEnd;
-            this.Duration = ApplicationStateManagerBase.Current.Duration;
+            if (ApplicationStateManagerBase.Current != null)
+            {
+                ApplicationStateManagerBase.Current.CreateBluetoothDriver();
+                ApplicationStateManagerBase.Current.CreateSettingsStorage();
+            }
+
+            this.InitEnd = DateTime.Now;
+            this.Duration = this.SetDuration();
         }
 
         #endregion
 
         #region Methods
+
+        private String SetDuration()
+        {
+            TimeSpan durationSpan = TimeSpan.Zero;
+            String result = null;
+
+            durationSpan = this.InitEnd - this.InitStart;
+            result = durationSpan.TotalMilliseconds.ToString() + " milliseconds";
+            return result;
+        }
 
         #endregion
     }

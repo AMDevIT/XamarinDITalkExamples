@@ -10,6 +10,12 @@ namespace Xamarin_DIF.ViewModels
     public class MainPageViewModel
         : BindableBase
     {
+        #region Consts
+
+        private const string DateTimeFormatString = "HH:mm:ss, FFFF";
+
+        #endregion
+
         #region Fields
 
         private DateTime initStart = default(DateTime);
@@ -32,6 +38,17 @@ namespace Xamarin_DIF.ViewModels
             }
         }
 
+        public String FormattedInitStart
+        {
+            get
+            {
+                String result = null;
+
+                result = this.initStart.ToString(DateTimeFormatString);
+                return result;
+            }
+        }
+
         public DateTime InitEnd
         {
             get
@@ -41,6 +58,17 @@ namespace Xamarin_DIF.ViewModels
             protected set
             {
                 this.SetProperty(ref this.initEnd, value);
+            }
+        }
+
+        public String FormattedInitEnd
+        {
+            get
+            {
+                String result = null;
+
+                result = this.initEnd.ToString(DateTimeFormatString);
+                return result;
             }
         }
 
@@ -54,7 +82,7 @@ namespace Xamarin_DIF.ViewModels
             {
                 this.SetProperty(ref this.duration, value);
             }
-        }
+        }        
 
         #endregion
 
@@ -62,18 +90,26 @@ namespace Xamarin_DIF.ViewModels
 
         public MainPageViewModel()
         {
-            App currentApp = App.Current as App;
-            TimeSpan durationSpan = TimeSpan.Zero;
+            App currentApp = App.Current as App;           
 
             this.InitStart = currentApp.DependencyInitializationStart;
             this.InitEnd = currentApp.DependencyInitializationEnd;
-            durationSpan = this.InitEnd - this.InitStart;
-            this.Duration = durationSpan.ToString();
+            this.Duration = this.SetDuration();
         }
 
         #endregion
 
         #region Methods
+
+        private String SetDuration()
+        {
+            TimeSpan durationSpan = TimeSpan.Zero;
+            String result = null;
+
+            durationSpan = this.InitEnd - this.InitStart;            
+            result = durationSpan.TotalMilliseconds.ToString() + " milliseconds";            
+            return result;
+        }
 
         #endregion
     }

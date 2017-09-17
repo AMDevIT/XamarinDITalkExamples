@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Xamarin_DIF"
+             xmlns:common="clr-namespace:Xamarin_DIF.Common"
              xmlns:viewmodels="clr-namespace:Xamarin_DIF.ViewModels"
              x:Class="Xamarin_DIF.MainPage">
     <ContentPage.BindingContext>
@@ -13,24 +14,46 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
+        <Image Source="{common:ImageResource Xamarin_DIF.Assets.twitter_header.jpg}" 
+               Aspect="AspectFill"                
+               Margin="15"
+               Grid.Row="0" />        
+        
         <Label Text="Xamarin Forms Dependency Framework test" 
                VerticalOptions="Center" 
                HorizontalOptions="Center" 
-               Grid.Row="0"/>
-        <StackLayout Grid.Row="1" Orientation="Horizontal">
-            <Label Text="Init start: " Margin="10" />
-            <Label Text="{Binding InitStart}" />
+               FontSize="24"
+               FontAttributes="Bold"
+               Grid.Row="1"/>
+        
+        <Label Text="This app will measure code dependencies instantiation execution time. It uses Xamarin Forms own DI engine, that uses reflection to locate and instantiate interface implementations." 
+               Grid.Row="2" Margin="10" />
+        
+        <StackLayout Grid.Row="3" Orientation="Vertical" HorizontalOptions="Center">
+            <Label Text="Dependencies initialization start time: " Margin="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="{Binding FormattedInitStart}" HorizontalOptions="Center" VerticalOptions="Center"/>
         </StackLayout>
 
-        <StackLayout Grid.Row="2" Orientation="Horizontal">
-            <Label Text="Init ends: " Margin="10" />
-            <Label Text="{Binding InitEnd}" />
+        <StackLayout Grid.Row="4" Orientation="Vertical" HorizontalOptions="Center">
+            <Label Text="Dependencies initialization end time: " Margin="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="{Binding FormattedInitEnd}" HorizontalOptions="Center" VerticalOptions="Center"/>
         </StackLayout>
 
-        <StackLayout Grid.Row="3" Orientation="Horizontal">
-            <Label Text="Init ends: " Margin="10" />
-            <Label Text="{Binding Duration}" />
+        <StackLayout Grid.Row="5" Orientation="Vertical" HorizontalOptions="Center">
+            <Label Text="Current initialization duration: " Margin="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="{Binding Duration}" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <StackLayout Grid.Row="6" Orientation="Vertical" HorizontalOptions="Center">            
+            <Label Text="Reference speed table" Margin="10" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Text="Average ping to Google.com using a broadband connection: 23 ms." HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="Average fast HDD 7200 rpm seek latency: 16.18 ms." HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="Average fast HDD 5400 rpm seek latency: 22.19 ms." HorizontalOptions="Center" VerticalOptions="Center"/>
         </StackLayout>
     </Grid>
 </ContentPage>

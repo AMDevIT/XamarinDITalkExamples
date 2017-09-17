@@ -13,9 +13,6 @@ namespace XamarinExNoDIF
         #region Fields
                 
         private static ApplicationStateManagerBase current = null;
-
-        protected BluetoothDriverBase bluetoothDriverBase = null;
-        protected SettingsStorageBase settings = null;
         
         #endregion
 
@@ -32,29 +29,7 @@ namespace XamarinExNoDIF
                 current = value;
             }
         }
-
-        #region Properties
-
-        public DateTime InitStart
-        {
-            get;
-            set;
-        }
-
-        public DateTime InitEnd
-        {
-            get;
-            set;
-        }
-
-        public String Duration
-        {
-            get;
-            set;
-        }
-
-        #endregion
-
+      
         #endregion
 
         #region Methods
@@ -71,7 +46,8 @@ namespace XamarinExNoDIF
             return applicationStateManagerBase;
         }
 
-        public abstract void InitializeApplicationServices();
+        public abstract BluetoothDriverBase CreateBluetoothDriver();
+        public abstract SettingsStorageBase CreateSettingsStorage();
 
         #endregion
     }

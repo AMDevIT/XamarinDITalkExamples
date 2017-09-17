@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XamarinExNoDIF;
+using XamarinExNoDIF.Hardware.BT;
+using XamarinExNoDIF.Storage;
 using XamarinExNoDIF.UWP.Hardware.BT;
 using XamarinExNoDIF.UWP.Storage;
 
@@ -17,12 +19,16 @@ namespace XamarinExNoDIF.UWP
 
         #endregion
 
-        #region Methods
+        #region Methods        
 
-        public override void InitializeApplicationServices()
+        public override BluetoothDriverBase CreateBluetoothDriver()
         {
-            this.bluetoothDriverBase = new UWPBluetoothDriver();
-            this.settings = new UWPSettingsStorage();
+            return new UWPBluetoothDriver();
+        }
+
+        public override SettingsStorageBase CreateSettingsStorage()
+        {
+            return new UWPSettingsStorage();
         }
 
         #endregion
