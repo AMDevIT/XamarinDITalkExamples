@@ -3,7 +3,7 @@
   <Identity Name="e8b774b0-9aa5-4f5c-bea7-d49aaf3551e6" Publisher="CN=xmave" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="e8b774b0-9aa5-4f5c-bea7-d49aaf3551e6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>XamarinExNoDIF.UWP</DisplayName>
+    <DisplayName>Xamarin abstract factory pattern test</DisplayName>
     <PublisherDisplayName>xmave</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

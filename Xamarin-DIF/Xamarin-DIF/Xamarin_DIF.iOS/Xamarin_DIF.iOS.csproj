@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin_DIF\Xamarin_DIF.csproj">
-      <Project>{7b948450-bf02-41e6-bdf3-c086c0031230}</Project>
+      <Project>{C474AF7E-046F-4226-B20B-B5E8868FBB1A}</Project>
       <Name>Xamarin_DIF</Name>
     </ProjectReference>
   </ItemGroup>
