@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using Xamarin_DIF.Hardware;
 using Xamarin_DIF.Hardware.BT;
 using Xamarin_DIF.Storage;
 
@@ -73,6 +74,8 @@ namespace Xamarin_DIF
             this.bluetoothDriver = DependencyService.Get<IBluetoothDriver>();
             this.settingsStorage = DependencyService.Get<ISettingsStorage>();
 
+            var sensors = DependencyService.Get<SensorsBase>();
+            
             this.DependencyInitializationEnd = DateTime.Now;
         }
 
