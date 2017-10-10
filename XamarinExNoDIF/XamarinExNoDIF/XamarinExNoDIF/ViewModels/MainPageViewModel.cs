@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XamarinExNoDIF.Common;
-using XamarinExNoDIF.Hardware.BT;
+using XamarinExNoDIF.Hardware;
 using XamarinExNoDIF.Storage;
 
 namespace XamarinExNoDIF.ViewModels
@@ -101,6 +101,7 @@ namespace XamarinExNoDIF.ViewModels
             {
                 ApplicationStateManagerBase.Current.CreateBluetoothDriver();
                 ApplicationStateManagerBase.Current.CreateSettingsStorage();
+                ApplicationStateManagerBase.Current.CreateSensorsDriver();
             }
 
             this.InitEnd = DateTime.Now;

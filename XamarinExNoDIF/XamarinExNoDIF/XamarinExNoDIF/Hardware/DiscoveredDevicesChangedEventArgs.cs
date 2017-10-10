@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XamarinExNoDIF.Hardware.BT
+namespace XamarinExNoDIF.Hardware
 {
     public class DiscoveredDevicesChangedEventArgs
         : EventArgs

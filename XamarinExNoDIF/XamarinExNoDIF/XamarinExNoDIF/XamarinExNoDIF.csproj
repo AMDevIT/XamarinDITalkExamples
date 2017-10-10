@@ -41,10 +41,11 @@
     <Compile Include="ApplicationStateManagerBase.cs" />
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\ImageResourceExtension.cs" />
-    <Compile Include="Hardware\BT\DiscoveredDevicesChangedEventArgs.cs" />
-    <Compile Include="Hardware\BT\XMBluetoothDevice.cs" />
-    <Compile Include="Hardware\BT\BluetoothDriverBase.cs" />
-    <Compile Include="Hardware\BT\BluetoothDriverStates.cs" />
+    <Compile Include="Hardware\DiscoveredDevicesChangedEventArgs.cs" />
+    <Compile Include="Hardware\SensorsBase.cs" />
+    <Compile Include="Hardware\XMBluetoothDevice.cs" />
+    <Compile Include="Hardware\BluetoothDriverBase.cs" />
+    <Compile Include="Hardware\BluetoothDriverStates.cs" />
     <Compile Include="IApplicationStateManagerInitializer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

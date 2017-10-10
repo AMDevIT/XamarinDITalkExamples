@@ -5,7 +5,6 @@ using System.Text;
 
 using Xamarin.Forms;
 using Xamarin_DIF.Hardware;
-using Xamarin_DIF.Hardware.BT;
 using Xamarin_DIF.Storage;
 
 namespace Xamarin_DIF

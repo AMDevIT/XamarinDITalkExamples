@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Bluetooth.Advertisement;
-using XamarinExNoDIF.Hardware.BT;
+using XamarinExNoDIF.Hardware;
 
-namespace XamarinExNoDIF.UWP.Hardware.BT
+namespace XamarinExNoDIF.UWP.Hardware
 {
     public class UWPBluetoothDriver
         : BluetoothDriverBase

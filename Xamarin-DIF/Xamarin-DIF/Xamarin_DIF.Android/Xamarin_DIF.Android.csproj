@@ -121,10 +121,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidApplicationStateManager.cs" />
-    <Compile Include="Hardware\BT\AndroidBluetoothDriver.cs" />
+    <Compile Include="Hardware\DroidBluetoothDriver.cs" />
+    <Compile Include="Hardware\DroidLEScannerCallback.cs" />
+    <Compile Include="Hardware\DroidSensorListener.cs" />
+    <Compile Include="Hardware\DroidSensors.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\DroidSettingsStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xamarin_DIF.Hardware.BT
+namespace Xamarin_DIF.Hardware
 {
     public interface IBluetoothDriver
     {

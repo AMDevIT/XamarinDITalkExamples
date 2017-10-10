@@ -10,38 +10,66 @@ namespace Xamarin_DIF.Hardware
     {
         #region Fields
 
-        private readonly Guid instanceID;
-        protected string platform = String.Empty;
-
+        private SensorTypes requestedSensors = SensorTypes.None;
+        private bool initialized = false;
+        private bool started = false;
+        
         #endregion
 
         #region Properties
 
-        public Guid InstanceID
+        public SensorTypes RequestedSensors
         {
             get
             {
-                return this.instanceID;
+                return this.requestedSensors;
+            }
+            protected set
+            {
+                this.requestedSensors = value;
             }
         }
 
-        public String Platform
+        public bool Initialized
         {
             get
             {
-                return this.platform;
+                return this.initialized;
+            }
+            protected set
+            {
+                this.initialized = value;
             }
         }
 
+        public bool Started
+        {
+            get
+            {
+                return this.started;
+            }
+            protected set
+            {
+                this.started = value;
+            }                
+        }
+        
         #endregion
 
         #region .ctor
 
         public SensorsBase()
-        {
-            this.instanceID = Guid.NewGuid();
+        {            
         }
 
+        #endregion
+
+        #region Methods
+
+        public abstract bool Initialize(SensorTypes sensorTypes);
+        public abstract void Start();
+        public abstract void Stop();
+        
         #endregion
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XamarinExNoDIF.Hardware.BT;
+using XamarinExNoDIF.Hardware;
 using XamarinExNoDIF.Storage;
 
 namespace XamarinExNoDIF
@@ -48,6 +48,8 @@ namespace XamarinExNoDIF
 
         public abstract BluetoothDriverBase CreateBluetoothDriver();
         public abstract SettingsStorageBase CreateSettingsStorage();
+        public abstract SensorsBase CreateSensorsDriver();
+    
 
         #endregion
     }

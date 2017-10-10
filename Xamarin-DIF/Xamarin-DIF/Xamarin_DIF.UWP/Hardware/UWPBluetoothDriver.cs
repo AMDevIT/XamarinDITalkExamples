@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin_DIF.Hardware.BT;
+using Xamarin_DIF.Hardware;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Xamarin_DIF.UWP.Hardware.BT.UWPBluetoothDriver))]
-namespace Xamarin_DIF.UWP.Hardware.BT
+[assembly: Xamarin.Forms.Dependency(typeof(Xamarin_DIF.UWP.Hardware.UWPBluetoothDriver))]
+namespace Xamarin_DIF.UWP.Hardware
 {
     public class UWPBluetoothDriver
         : IBluetoothDriver

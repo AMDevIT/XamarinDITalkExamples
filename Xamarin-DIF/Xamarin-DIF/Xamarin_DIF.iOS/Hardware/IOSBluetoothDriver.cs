@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using Xamarin_DIF.Hardware;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Xamarin_DIF.Hardware.BT;
-
-namespace Xamarin_DIF.Droid.Hardware.BT
+[assembly: Xamarin.Forms.Dependency(typeof(Xamarin_DIF.iOS.Hardware.IOSBluetoothDriver))]
+namespace Xamarin_DIF.iOS.Hardware
 {
-    public class AndroidBluetoothDriver
+    public class IOSBluetoothDriver
         : IBluetoothDriver
     {
         #region Properties
@@ -29,11 +22,11 @@ namespace Xamarin_DIF.Droid.Hardware.BT
         #region Methods
 
         public void Start()
-        {         
+        {
         }
 
         public void Stop()
-        {         
+        {
         }
 
         #endregion

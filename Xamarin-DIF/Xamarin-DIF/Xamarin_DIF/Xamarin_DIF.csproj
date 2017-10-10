@@ -40,9 +40,10 @@
     </Compile>
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\ImageResourceExtension.cs" />
-    <Compile Include="Hardware\BT\BluetoothDriverStates.cs" />
-    <Compile Include="Hardware\BT\IBluetoothDriver.cs" />
+    <Compile Include="Hardware\BluetoothDriverStates.cs" />
+    <Compile Include="Hardware\IBluetoothDriver.cs" />
     <Compile Include="Hardware\SensorsBase.cs" />
+    <Compile Include="Hardware\SensorTypes.cs" />
     <Compile Include="IApplicationStateManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
