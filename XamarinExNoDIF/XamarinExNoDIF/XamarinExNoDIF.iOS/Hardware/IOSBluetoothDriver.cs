@@ -2,13 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Xamarin_DIF.Hardware;
+using XamarinExNoDIF.Hardware;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Xamarin_DIF.iOS.Hardware.IOSBluetoothDriver))]
-namespace Xamarin_DIF.iOS.Hardware
+namespace XamarinExNoDIF.iOS.Hardware
 {
     public class IOSBluetoothDriver
-        : IBluetoothDriver
+        : BluetoothDriverBase
     {
         #region Fields
 
@@ -16,94 +15,83 @@ namespace Xamarin_DIF.iOS.Hardware
         private CBUUID[] scanFilter = new CBUUID[] { };
 
         #endregion
-
-        #region Properties
-
-        public BluetoothDriverStates DriverState
-        {
-            get;
-            private set;
-        }
-
-        public Guid[] Filter
-        {
-            get;
-            private set;
-        }
-
-        #endregion
-
+      
         #region .ctor
-
         public IOSBluetoothDriver()
+            : base(null)
         {
+
+        }
+
+        public IOSBluetoothDriver(Guid[] filter)
+        {
+            List<CBUUID> uuidList = null;
+
             this.centralManager = new CBCentralManager();
             this.centralManager.DiscoveredPeripheral += CentralManager_DiscoveredPeripheral;
-            switch(this.centralManager.State)
+            switch (this.centralManager.State)
             {
                 case CBCentralManagerState.PoweredOff:
                 case CBCentralManagerState.Unauthorized:
-                case CBCentralManagerState.Unsupported:                
-                    this.DriverState = BluetoothDriverStates.NotPresent;
+                case CBCentralManagerState.Unsupported:
+                    this.State = BluetoothDriverStates.NotPresent;
                     break;
                 case CBCentralManagerState.PoweredOn:
                 case CBCentralManagerState.Resetting:
-                    this.DriverState = BluetoothDriverStates.Enabled;
+                    this.State = BluetoothDriverStates.Enabled;
                     break;
                 case CBCentralManagerState.Unknown:
-                    this.DriverState = BluetoothDriverStates.Unknown;
+                    this.State = BluetoothDriverStates.Unknown;
                     break;
             }
-        }
-
-        #endregion
-
-        #region Methods
-
-        public void InitFilter(Guid[] filter)
-        {
-            List<CBUUID> uuidList = null;
 
             if (filter != null && filter.Length > 0)
             {
                 uuidList = new List<CBUUID>();
-                foreach(Guid currentFilter in filter)
+                foreach (Guid currentFilter in filter)
                 {
                     CBUUID uuid = null;
                     uuid = CBUUID.FromString(currentFilter.ToString());
                     uuidList.Add(uuid);
                 }
                 this.scanFilter = uuidList.ToArray();
+                this.Filter = filter;
             }
+            else
+                this.Filter = new Guid[] { };
         }
 
-        public void Start()
+        #endregion
+
+        #region Methods
+      
+        public override void Start()
         {
             PeripheralScanningOptions scanningOptions = new PeripheralScanningOptions();
 
-            switch (this.DriverState)
+            switch (this.State)
             {
                 case BluetoothDriverStates.Enabled:
                     try
                     {
                         this.centralManager.ScanForPeripherals(this.scanFilter, scanningOptions);
                     }
-                    catch(Exception exc)
+                    catch (Exception exc)
                     {
                         System.Diagnostics.Debug.WriteLine(exc.ToString());
                     }
-                    this.DriverState = BluetoothDriverStates.Discovering;
+                    this.State = BluetoothDriverStates.Discovering;
                     break;
             }
         }
 
-        public void Stop()
+        public override void Stop()
         {
-            if (this.DriverState == BluetoothDriverStates.Discovering)
+            if (this.State == BluetoothDriverStates.Discovering)
             {
                 this.centralManager.StopScan();
-                this.DriverState = BluetoothDriverStates.Enabled;
-            }            
+                this.State = BluetoothDriverStates.Enabled;
+            }
         }
 
         #endregion
@@ -112,8 +100,8 @@ namespace Xamarin_DIF.iOS.Hardware
 
         private void CentralManager_DiscoveredPeripheral(object sender, CBDiscoveredPeripheralEventArgs e)
         {
-            
-        }        
+
+        }
 
         #endregion
     }

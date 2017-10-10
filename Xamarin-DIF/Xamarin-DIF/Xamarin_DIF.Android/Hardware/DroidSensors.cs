@@ -43,9 +43,10 @@ namespace Xamarin_DIF.Droid.Hardware
         {
             if (!this.Initialized)
             {
-                // Acelerometer
+                // Accelerometer
                 if (sensorTypes.HasFlag(SensorTypes.Accelerometer))                
                     this.accelerometer = this.sensorManager.GetDefaultSensor(SensorType.Accelerometer);
+                // Gyroscope
                 if (sensorTypes.HasFlag(SensorTypes.Gyroscope))
                     this.gyroscope = this.sensorManager.GetDefaultSensor(SensorType.Gyroscope);
                 this.Initialized = true;

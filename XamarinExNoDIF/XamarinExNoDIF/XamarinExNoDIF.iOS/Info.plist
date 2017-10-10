@@ -50,5 +50,9 @@
 	<string>Xamarin abstract factory pattern test</string>
 	<key>CFBundleIdentifier</key>
 	<string>test.xamarin.meetCast.NoDI</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Can I use your bluetooth?</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Can I use your motion sensors?</string>
 </dict>
 </plist>

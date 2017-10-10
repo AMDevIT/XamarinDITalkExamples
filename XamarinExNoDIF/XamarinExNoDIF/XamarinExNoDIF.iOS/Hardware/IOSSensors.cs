@@ -3,10 +3,9 @@ using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Xamarin_DIF.Hardware;
+using XamarinExNoDIF.Hardware;
 
-[assembly: Xamarin.Forms.Dependency(typeof(Xamarin_DIF.iOS.Hardware.IOSSensors))]
-namespace Xamarin_DIF.iOS.Hardware
+namespace XamarinExNoDIF.iOS.Hardware
 {
     public class IOSSensors
         : SensorsBase
@@ -22,30 +21,21 @@ namespace Xamarin_DIF.iOS.Hardware
 
         #region .ctor
 
-        public IOSSensors()
+        public IOSSensors(SensorTypes sensorTypes)
         {
             motionManager = new CMMotionManager();            
+            this.queue = new NSOperationQueue();
+            this.RequestedSensors = sensorTypes;
         }
 
         #endregion
 
         #region Methods
-
-        public override bool Initialize(SensorTypes sensorTypes)
-        {
-            if (this.queue == null)
-                this.queue = new NSOperationQueue();
-            this.RequestedSensors = sensorTypes;
-            return true;
-        }
-
+        
         public override void Start()
         {
             if (this.Started == false)
             {
-                if (this.queue == null)
-                    this.queue = new NSOperationQueue();
-
                 if (this.RequestedSensors.HasFlag(SensorTypes.Accelerometer) && this.motionManager.AccelerometerAvailable)
                 {
                     this.motionManager.StartAccelerometerUpdates(this.queue, (CMAccelerometerData accelerometerData, NSError error) =>
@@ -75,7 +65,7 @@ namespace Xamarin_DIF.iOS.Hardware
                 if (this.accelerometerStarted)
                 {
                     this.motionManager.StopAccelerometerUpdates();
-                    this.accelerometerStarted = false;                    
+                    this.accelerometerStarted = false;
                 }
 
                 if (this.gyroStarted)

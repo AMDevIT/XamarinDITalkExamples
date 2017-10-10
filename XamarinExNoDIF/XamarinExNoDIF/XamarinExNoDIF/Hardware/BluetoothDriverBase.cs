@@ -8,9 +8,7 @@ namespace XamarinExNoDIF.Hardware
 {
     public abstract class BluetoothDriverBase
     {
-        #region Events
-
-        public event EventHandler<DiscoveredDevicesChangedEventArgs> DiscoveredDevicesChanged;
+        #region Events        
 
         #endregion
 
@@ -28,6 +26,12 @@ namespace XamarinExNoDIF.Hardware
             protected set;
         }
 
+        public Guid[] Filter
+        {
+            get;
+            protected set;
+        }
+
         #endregion
 
         #region .ctor
@@ -37,27 +41,19 @@ namespace XamarinExNoDIF.Hardware
             this.bluetoothDevices = new List<XMBluetoothDevice>();
         }
 
+        public BluetoothDriverBase(Guid[] filter)
+            : this()
+        {
+
+        }
+
         #endregion
 
         #region Methods
 
         public abstract void Start();
         public abstract void Stop();
-
-        protected void RaiseDiscoveredDevicesChanged()
-        {
-            DiscoveredDevicesChangedEventArgs eventArgs = null;
-
-            if (this.DiscoveredDevicesChanged != null)
-            {
-                if (this.bluetoothDevices.Count == 0)
-                    eventArgs = new DiscoveredDevicesChangedEventArgs();
-                else
-                    eventArgs = new DiscoveredDevicesChangedEventArgs(this.bluetoothDevices.ToArray());
-                this.DiscoveredDevicesChanged(this, eventArgs);
-            }
-        }
-
+     
         #endregion
     }
 }

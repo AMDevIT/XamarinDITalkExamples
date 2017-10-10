@@ -15,10 +15,16 @@ namespace Xamarin_DIF.Hardware
             get;
         }
 
+        Guid[] Filter
+        {
+            get;
+        }
+
         #endregion
 
         #region Methods
 
+        void InitFilter(Guid[] filter);
         void Start();
         void Stop();
 

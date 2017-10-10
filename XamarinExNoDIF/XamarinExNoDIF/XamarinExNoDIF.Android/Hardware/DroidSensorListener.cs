@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Hardware;
 
-namespace Xamarin_DIF.Droid.Hardware
+namespace XamarinExNoDIF.Droid.Hardware
 {
     public class DroidSensorListener
         : Java.Lang.Object, ISensorEventListener
@@ -23,7 +23,7 @@ namespace Xamarin_DIF.Droid.Hardware
         }
 
         public void OnSensorChanged(SensorEvent e)
-        {            
+        {
         }
 
         #endregion

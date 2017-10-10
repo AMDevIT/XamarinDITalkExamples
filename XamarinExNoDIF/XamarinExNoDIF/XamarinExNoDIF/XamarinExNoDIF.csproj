@@ -41,8 +41,8 @@
     <Compile Include="ApplicationStateManagerBase.cs" />
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\ImageResourceExtension.cs" />
-    <Compile Include="Hardware\DiscoveredDevicesChangedEventArgs.cs" />
     <Compile Include="Hardware\SensorsBase.cs" />
+    <Compile Include="Hardware\SensorTypes.cs" />
     <Compile Include="Hardware\XMBluetoothDevice.cs" />
     <Compile Include="Hardware\BluetoothDriverBase.cs" />
     <Compile Include="Hardware\BluetoothDriverStates.cs" />

@@ -123,6 +123,8 @@
     <Compile Include="DroidApplicationStateManager.cs" />
     <Compile Include="DroidApplicationStateManagerInitializer.cs" />
     <Compile Include="Hardware\DroidBluetoothDriver.cs" />
+    <Compile Include="Hardware\DroidLEScannerCallback.cs" />
+    <Compile Include="Hardware\DroidSensorListener.cs" />
     <Compile Include="Hardware\DroidSensors.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

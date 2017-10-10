@@ -8,12 +8,50 @@ namespace XamarinExNoDIF.Hardware
 {
     public abstract class SensorsBase
     {
+        #region Fields
+
+        private SensorTypes requestedSensors = SensorTypes.None;
+        private bool initialized = false;
+        private bool started = false;
+
+        #endregion
+
         #region Properties
 
-        public bool EnableAll
+        public SensorTypes RequestedSensors
         {
-            get;
-            set;
+            get
+            {
+                return this.requestedSensors;
+            }
+            protected set
+            {
+                this.requestedSensors = value;
+            }
+        }
+
+        public bool Initialized
+        {
+            get
+            {
+                return this.initialized;
+            }
+            protected set
+            {
+                this.initialized = value;
+            }
+        }
+
+        public bool Started
+        {
+            get
+            {
+                return this.started;
+            }
+            protected set
+            {
+                this.started = value;
+            }
         }
 
         #endregion
@@ -21,20 +59,13 @@ namespace XamarinExNoDIF.Hardware
         #region .ctor
 
         public SensorsBase()
-            : this(false)
         {
-
-        }
-
-        public SensorsBase(bool enableAll)
-        {
-            this.EnableAll = enableAll;
         }
 
         #endregion
 
         #region Methods
-
+                
         public abstract void Start();
         public abstract void Stop();
 

@@ -26,6 +26,7 @@ namespace Xamarin_DIF.Droid.Hardware
         private BluetoothAdapter bluetoothAdapter = null;
         private BluetoothLeScanner bluetoothLeScanner = null;
         private DroidLEScannerCallback scannerCallback = null;
+        private List<ScanFilter> scanfiltersList = new List<ScanFilter>();          // Scanfilters are broken in most android implementations!
 
         #endregion
 
@@ -36,6 +37,13 @@ namespace Xamarin_DIF.Droid.Hardware
             get;
             private set;
         }
+
+        public Guid[] Filter
+        {
+            get;
+            private set;
+        }
+
 
         #endregion
 
@@ -62,8 +70,38 @@ namespace Xamarin_DIF.Droid.Hardware
 
         #region Methods
 
+        public void InitFilter(Guid[] filter)
+        {
+            if (filter != null && filter.Length > 0)
+            {
+                foreach(Guid selectedFilter in filter)
+                {
+                    ParcelUuid parcelUuid = null;
+                    ScanFilter.Builder filterBuilder = new ScanFilter.Builder();
+                    ScanFilter currentFilter = null;
+
+                    try
+                    {
+                        parcelUuid = ParcelUuid.FromString(selectedFilter.ToString());
+                        filterBuilder.SetServiceUuid(parcelUuid);
+                        currentFilter = filterBuilder.Build();
+                        this.scanfiltersList.Add(currentFilter);
+                    }
+                    catch(Exception)
+                    {
+
+                    }
+
+                    this.Filter = filter;
+                }
+            }
+        }
+
         public void Start()
         {
+            ScanSettings.Builder scanSettingsBuilder = null;
+            ScanSettings scanSettings = null;
+
             switch(this.DriverState)
             {
                 case BluetoothDriverStates.NotPresent:
@@ -71,8 +109,24 @@ namespace Xamarin_DIF.Droid.Hardware
 
                 case BluetoothDriverStates.Enabled:
                     this.scannerCallback = new DroidLEScannerCallback();
-                    this.bluetoothLeScanner = this.bluetoothAdapter.BluetoothLeScanner;                    
-                    this.bluetoothLeScanner.StartScan(this.scannerCallback);
+                    this.bluetoothLeScanner = this.bluetoothAdapter.BluetoothLeScanner;
+                    if (this.scanfiltersList.Count == 0)
+                        this.bluetoothLeScanner.StartScan(this.scannerCallback);
+                    else
+                    {
+                        scanSettingsBuilder = new ScanSettings.Builder();
+                        scanSettingsBuilder.SetMatchMode(BluetoothScanMatchMode.Aggressive);
+                        scanSettingsBuilder.SetScanMode(Android.Bluetooth.LE.ScanMode.LowLatency);
+                        scanSettings = scanSettingsBuilder.Build();
+                        try
+                        {
+                            this.bluetoothLeScanner.StartScan(this.scanfiltersList, scanSettings, this.scannerCallback);
+                        }
+                        catch(Exception)
+                        {
+
+                        }
+                    }
                     this.DriverState = BluetoothDriverStates.Discovering;
                     break;
             }

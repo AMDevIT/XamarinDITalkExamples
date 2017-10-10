@@ -11,19 +11,19 @@ using Android.Views;
 using Android.Widget;
 using Android.Bluetooth.LE;
 
-namespace Xamarin_DIF.Droid.Hardware
+namespace XamarinExNoDIF.Droid.Hardware
 {
     public class DroidLEScannerCallback
-        : ScanCallback
+       : ScanCallback
     {
         #region Methods
 
         public override void OnBatchScanResults(IList<ScanResult> results)
-        {            
+        {
         }
 
         public override void OnScanResult([GeneratedEnum] ScanCallbackType callbackType, ScanResult result)
-        {            
+        {         
         }
 
         #endregion

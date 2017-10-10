@@ -16,6 +16,7 @@ namespace Xamarin_DIF
         private IApplicationStateManager applicationStateManager = null;
         private IBluetoothDriver bluetoothDriver = null;
         private ISettingsStorage settingsStorage = null;
+        private SensorsBase sensors = null;
 
         #endregion
 
@@ -70,10 +71,21 @@ namespace Xamarin_DIF
             this.DependencyInitializationStart = DateTime.Now;
 
             this.applicationStateManager = DependencyService.Get<IApplicationStateManager>();
-            this.bluetoothDriver = DependencyService.Get<IBluetoothDriver>();
-            this.settingsStorage = DependencyService.Get<ISettingsStorage>();
 
-            var sensors = DependencyService.Get<SensorsBase>();
+            // Get the bluetooth LE instance for peripherals discovery.
+
+            this.bluetoothDriver = DependencyService.Get<IBluetoothDriver>();
+            this.bluetoothDriver.Start();
+
+            // Get the storage istance for app settings.
+
+            this.settingsStorage = DependencyService.Get<ISettingsStorage>();            
+
+            // Get the motion sensors.
+
+            this.sensors = DependencyService.Get<SensorsBase>();
+            this.sensors.Initialize(SensorTypes.Accelerometer | SensorTypes.Gyroscope);
+            this.sensors.Start();     
             
             this.DependencyInitializationEnd = DateTime.Now;
         }

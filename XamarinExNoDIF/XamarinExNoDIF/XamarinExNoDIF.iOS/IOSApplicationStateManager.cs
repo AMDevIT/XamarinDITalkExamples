@@ -1,12 +1,14 @@
 ﻿using System;
-using XamarinExNoDIF.Droid.Hardware;
-using XamarinExNoDIF.Droid.Storage;
+using System.Collections.Generic;
+using System.Text;
 using XamarinExNoDIF.Hardware;
+using XamarinExNoDIF.iOS.Hardware;
+using XamarinExNoDIF.iOS.Storage;
 using XamarinExNoDIF.Storage;
 
-namespace XamarinExNoDIF.Droid
+namespace XamarinExNoDIF.iOS
 {
-    public class DroidApplicationStateManager
+    public class IOSApplicationStateManager
         : ApplicationStateManagerBase
     {
         #region Methods
@@ -18,30 +20,30 @@ namespace XamarinExNoDIF.Droid
 
         public override BluetoothDriverBase CreateBluetoothDriver(Guid[] filter)
         {
-            DroidBluetoothDriver bluetoothDriver = null;
+            IOSBluetoothDriver bluetoothDriver = null;
 
             if (filter == null)
-                bluetoothDriver = new DroidBluetoothDriver();
+                bluetoothDriver = new IOSBluetoothDriver();
             else
-                bluetoothDriver = new DroidBluetoothDriver(filter);
+                bluetoothDriver = new IOSBluetoothDriver(filter);
             return bluetoothDriver;
-        }
-
-        public override SettingsStorageBase CreateSettingsStorage()
-        {
-            DroidSettingsStorage settingsStorage = new DroidSettingsStorage();
-            return settingsStorage;
         }
 
         public override SensorsBase CreateSensorsDriver()
         {
             return this.CreateSensorsDriver(SensorTypes.Accelerometer | SensorTypes.Gyroscope);
-        }        
+        }
 
         public override SensorsBase CreateSensorsDriver(SensorTypes sensorTypes)
         {
-            DroidSensors droidSensors = new DroidSensors(sensorTypes);
-            return droidSensors;
+            IOSSensors sensors = new IOSSensors(sensorTypes);
+            return sensors;
+        }
+
+        public override SettingsStorageBase CreateSettingsStorage()
+        {
+            IOSSettingsStorage settingsStorage = new IOSSettingsStorage();
+            return settingsStorage;
         }
 
         #endregion
